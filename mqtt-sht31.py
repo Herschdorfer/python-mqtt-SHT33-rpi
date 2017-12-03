@@ -26,25 +26,25 @@ client.connect(OPENHAB, 1883, 60)
 client.loop_start()
 
 try:
-    while True:
-        temperature = sensor.read_temperature()
+	while True:
+		temperature = sensor.read_temperature()
 		humidity = sensor.read_humidity()
-        humidity = round(humidity, 2)
-        temperature = round(temperature, 2)
-        print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, humidity))
-        sensor_data['temperature'] = temperature
-        sensor_data['humidity'] = humidity
+		humidity = round(humidity, 2)
+		temperature = round(temperature, 2)
+		print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, humidity))
+		sensor_data['temperature'] = temperature
+		sensor_data['humidity'] = humidity
 
-        # Sending humidity and temperature data to ThingsBoard
-        client.publish('kitchen/sensors/temperature', temperature , 1)
+		# Sending humidity and temperature data to ThingsBoard
+		client.publish('kitchen/sensors/temperature', temperature , 1)
 		client.publish('kitchen/sensors/humidity', humidity , 1)
 
-        next_reading += INTERVAL
-        sleep_time = next_reading-time.time()
-        if sleep_time > 0:
-            time.sleep(sleep_time)
+		next_reading += INTERVAL
+		sleep_time = next_reading-time.time()
+		if sleep_time > 0:
+			time.sleep(sleep_time)
 except KeyboardInterrupt:
-    pass
+	pass
 
 client.loop_stop()
 client.disconnect()
