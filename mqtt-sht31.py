@@ -9,7 +9,7 @@ import json
 
 sensor = SHT31(address = 0x44)
 
-THINGSBOARD_HOST = 'localhost'
+OPENHAB = 'localhost'
 
 # Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
 INTERVAL=2
@@ -21,14 +21,14 @@ next_reading = time.time()
 client = mqtt.Client()
 
 # Connect to ThingsBoard using default MQTT port and 60 seconds keepalive interval
-client.connect(THINGSBOARD_HOST, 1883, 60)
+client.connect(OPENHAB, 1883, 60)
 
 client.loop_start()
 
 try:
     while True:
         temperature = sensor.read_temperature()
-	humidity = sensor.read_humidity()
+		humidity = sensor.read_humidity()
         humidity = round(humidity, 2)
         temperature = round(temperature, 2)
         print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, humidity))
