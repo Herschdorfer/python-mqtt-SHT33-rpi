@@ -6,7 +6,7 @@ import Adafruit_BMP.BMP085 as BMP085
 import paho.mqtt.client as mqtt
 import json
 
-sensor = SHT31(address = 0x44)
+sensor = BMP085.BMP085()
 
 OPENHAB = 'localhost'
 
@@ -27,8 +27,8 @@ client.loop_start()
 try:
 	while True:
 		temperature = sensor.read_temperature()
-		pressure = sensor.read_humidity()
-		pressure = round(humidity, 2)
+		pressure = sensor..read_pressure()
+		pressure = round(pressure, 2)
 		temperature = round(temperature, 2)
 		print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, pressure))
 		sensor_data['temperature'] = temperature
