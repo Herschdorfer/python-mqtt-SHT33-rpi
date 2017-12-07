@@ -27,10 +27,10 @@ client.loop_start()
 try:
 	while True:
 		temperature = sensor.read_temperature()
-		pressure = sensor..read_pressure()
+		pressure = sensor.read_pressure()
 		pressure = round(pressure, 2)
 		temperature = round(temperature, 2)
-		print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, pressure))
+		print(u"Temperature: {:g}\u00b0C, Pressure: {:g}Pa ".format(temperature, pressure))
 		sensor_data['temperature'] = temperature
 		sensor_data['humidity'] = pressure
 
