@@ -29,8 +29,8 @@ try:
 	while True:
 		temperature = sensor.read_temperature()
 		humidity = sensor.read_humidity()
-		humidity = round(humidity, 2)
-		temperature = round(temperature, 2)
+		humidity = round(humidity, 3)
+		temperature = round(temperature, 3)
 		print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, humidity))
 		sensor_data['temperature'] = temperature
 		sensor_data['humidity'] = humidity

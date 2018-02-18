@@ -1,0 +1,17 @@
+[Unit]
+Description=DHT22 Sensor Daemon
+After=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/openhabian/python-mqtt-home/mqtt-dht22.py
+Restart=on-abort
+ 
+[Install]
+WantedBy=multi-user.target
+
+#copy to /lib/systemd/system/dht22-sensor.service and execute
+#sudo systemctl enable dht22-sensor.service
+#sudo systemctl start dht22-sensor.service
+#sudo systemctl status dht22-sensor.service
+#sudo journalctl -f -u dht22-sensor.service

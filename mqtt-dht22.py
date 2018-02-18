@@ -2,18 +2,21 @@
 import os
 import time
 import sys
-import Adafruit_BMP.BMP085 as BMP085
+import Adafruit_DHT
 import paho.mqtt.client as mqtt
 import json
 
-sensor = BMP085.BMP085()
+#sensor config
+sensor = Adafruit_DHT.DHT22
+pin = 22
 
+sensor_data = {'temperature': 0, 'humidity': 0}
+
+#openhab config
 OPENHAB = 'localhost'
 
 # Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
 INTERVAL=10
-
-sensor_data = {'temperature': 0, 'pressure': 0}
 
 next_reading = time.time() 
 
@@ -26,17 +29,15 @@ client.loop_start()
 
 try:
 	while True:
-		temperature = sensor.read_temperature()
-		pressure = sensor.read_pressure()
-		pressure = round(pressure, 2)
-		temperature = round(temperature, 2)
-#		print(u"Temperature: {:g}\u00b0C, Pressure: {:g}Pa ".format(temperature, pressure))
+		humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+		humidity = round(humidity, 3)
+		temperature = round(temperature, 3)
 		sensor_data['temperature'] = temperature
-		sensor_data['humidity'] = pressure
+		sensor_data['humidity'] = humidity
 
 		# Sending humidity and temperature data to ThingsBoard
-		client.publish('workingroom/sensors/temperature', temperature , 1)
-		client.publish('workingroom/sensors/pressure', pressure , 1)
+		client.publish('workingroom/sensors/temperature2', temperature , 1)
+		client.publish('workingroom/sensors/humidity', humidity , 1)
 
 		next_reading += INTERVAL
 		sleep_time = next_reading-time.time()

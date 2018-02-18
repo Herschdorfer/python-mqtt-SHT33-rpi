@@ -28,8 +28,8 @@ try:
 	while True:
 		temperature = sensor.read_temperature()
 		pressure = sensor.read_pressure()
-		pressure = round(pressure, 2)
-		temperature = round(temperature, 2)
+		pressure = round(pressure, 3)
+		temperature = round(temperature, 3)
 #		print(u"Temperature: {:g}\u00b0C, Pressure: {:g}Pa ".format(temperature, pressure))
 		sensor_data['temperature'] = temperature
 		sensor_data['humidity'] = pressure

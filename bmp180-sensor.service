@@ -1,0 +1,17 @@
+[Unit]
+Description=BMP180 Sensor Daemon
+After=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/openhabian/python-mqtt-home/mqtt-bmp180.py
+Restart=on-abort
+ 
+[Install]
+WantedBy=multi-user.target
+
+#copy to /lib/systemd/system/bmp180-sensor.service and execute 
+#sudo systemctl enable bmp180-sensor.service
+#sudo systemctl start bmp180-sensor.service
+#sudo systemctl status bmp180-sensor.service
+#sudo journalctl -f -u bmp180-sensor.service
