@@ -11,7 +11,7 @@ sensor = BMP085.BMP085()
 OPENHAB = 'localhost'
 
 # Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
-INTERVAL=10
+INTERVAL=60
 
 sensor_data = {'temperature': 0, 'pressure': 0}
 

@@ -16,7 +16,7 @@ sensor_data = {'temperature': 0, 'humidity': 0}
 OPENHAB = 'localhost'
 
 # Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
-INTERVAL=10
+INTERVAL=60
 
 next_reading = time.time() 
 
