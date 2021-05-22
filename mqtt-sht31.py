@@ -1,18 +1,18 @@
+#insatll pip3 install Adafruit-SHT31 paho-mqtt Adafruit-GPI as root
+
 from Adafruit_SHT31 import *
 
 import os
 import time
 import sys
-import Adafruit_DHT as dht
 import paho.mqtt.client as mqtt
 import json
 
 sensor = SHT31(address = 0x44)
 
-OPENHAB = 'localhost'
+OPENHAB = 'openhabianpi'
 
-# Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
-INTERVAL=2
+INTERVAL=30
 
 sensor_data = {'temperature': 0, 'humidity': 0}
 
@@ -20,7 +20,6 @@ next_reading = time.time()
 
 client = mqtt.Client()
 
-# Connect to ThingsBoard using default MQTT port and 60 seconds keepalive interval
 client.connect(OPENHAB, 1883, 60)
 
 client.loop_start()
